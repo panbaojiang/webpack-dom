@@ -1,10 +1,12 @@
 
 ## webpack执行流程
   1. 初始化：将配置文件作为参数传给webpack函数解析，生成Compiler对象
+
     ```js
     const config = require('./webpack.config.js');
     const Compiler = webpack(config);
     ```
+
     > Compiler 对象是 Webpack 的核心对象，它负责整个编译过程，包括解析配置、编译模块、输出文件等。
 
   2. 开始编译：调用 Compiler 对象 run 方法开始执行编译
