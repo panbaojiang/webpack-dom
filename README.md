@@ -6,20 +6,23 @@
     const config = require('./webpack.config.js');
     const Compiler = webpack(config);
     ```
-
     > Compiler 对象是 Webpack 的核心对象，它负责整个编译过程，包括解析配置、编译模块、输出文件等。
 
   2. 开始编译：调用 Compiler 对象 run 方法开始执行编译
+
     ```js
     Compiler.run((err, stats) => {...});
     ```
     > Compiler.run() 方法会触发 Compiler 对象的 compilation 事件，开始编译过程。
 
   3. 确定入口：根据配置中的 entry 找出所有的文件的入口作为编译的起点
+
     ```js
     const entry = config.entry;
     ```
+
   4. 编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行编译，再找出该模块依赖的模块，递归直到所有模块被加载进来
+
     ```js
     const normalModuleLoader = new NormalModuleLoader(compiler.context);
     const module = normalModuleLoader.loadModule(entry, (err, source, sourceMap, module) => {...});
@@ -27,17 +30,21 @@
     > NormalModuleLoader 是 Webpack 内置的模块加载器，用于加载和编译模块。
 
   5. 完成模块编译：所有模块构建完成后触发 finishModules 钩子，建立模块间的依赖关系图，准备进行代码生成阶段。
+
     ```js
     compilation.finish((err) => {...});
     ```
     > compilation 是 Compiler 对象的一个实例，用于管理编译过程中的所有模块和依赖关系。
 
   6. 输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 chunk，再把每个 chunk 转换成一个单独的文件加入到输出列表。
+
     ```js
     compilation.seal((err, chunks) => {...});
     ```
     > seal() 方法会触发 compilation 的 seal 事件，开始生成输出文件。
+
   7. 输出完成：再确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
+
     ```js
     compilation.createChunkAssets((err, chunk) => {...});
     ```
@@ -45,11 +52,13 @@
 
 ## webpack-dev-server
   1. 创建一个 Webpack 编译器
+
     ```js
       const compiler = webpack(config);
     ```
 
   2. 创建开发服务器实例
+
     ```js
       //引入express模块，用于创建Express应用程序
       const express = require('express');
@@ -104,6 +113,7 @@
     > 开发服务器通常提供实时重新加载、模块热更新等功能。
 
   4. 启动开发服务器
+
     ```js
       const server = new Server(compiler);
       /**
