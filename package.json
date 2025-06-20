@@ -1,0 +1,25 @@
+{
+  "name": "webpack-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node webpack-dev-server",
+    "bulid": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^11.3.0",
+    "html-webpack-plugin": "^5.6.3",
+    "memory-fs": "^0.5.0",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mime": "2.x",
+    "socket.io": "^4.8.1"
+  }
+}
